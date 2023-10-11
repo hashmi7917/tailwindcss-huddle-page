@@ -85,8 +85,8 @@ function Header() {
 function Nav() {
   return (
     <nav className="flex justify-between items-center px-4 xl:px-12 xl:pt-16 pt-4 pb-8 w-full md:pt-6">
-      <img className="h-6" src={Logo} alt="logo" />
-      <button className="px-8 py-1 bg-white hover:bg-primary-pink hover:text-white shadow-lg rounded-full text-sm font-medium cursor-pointer">
+      <img className="h-6 xl:h-full" src={Logo} alt="logo" />
+      <button className="lg:px-12 lg:py-2 px-8 py-1 bg-white hover:bg-primary-pink hover:text-white shadow-lg rounded-full text-md font-medium cursor-pointer">
         Try It Free
       </button>
     </nav>
