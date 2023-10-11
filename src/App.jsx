@@ -84,7 +84,7 @@ function Header() {
 
 function Nav() {
   return (
-    <nav className="flex justify-between items-center px-4 xl:px-12 xl:pt-4 pt-4 pb-8 w-full lg:w-5/6  md:pt-6">
+    <nav className="flex justify-between items-center px-4 xl:px-12 xl:pt-4 pt-4 pb-8 w-full md:pt-6">
       <img className="h-6" src={Logo} alt="logo" />
       <button className="px-8 py-1 bg-white hover:bg-primary-pink hover:text-white shadow-lg rounded-full text-sm font-medium cursor-pointer">
         Try It Free
@@ -95,7 +95,7 @@ function Nav() {
 
 function HeroContent() {
   return (
-    <div className="flex lg:w-5/6 flex-col xl:flex-row justify-around xl:justify-evenly xl:items-center h-full px-4 xl:px-12 xl:py-8">
+    <div className="flex flex-col xl:flex-row justify-around xl:justify-evenly xl:items-center h-full px-4 xl:px-12 xl:py-8">
       <HeroText />
       <HeroImage />
     </div>
