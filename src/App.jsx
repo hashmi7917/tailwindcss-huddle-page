@@ -1,7 +1,9 @@
+import { useEffect, useRef } from 'react';
 import React from 'react';
 import Logo from './images/logo.svg';
 import FooterLogo from './images/footer-logo.svg';
-import MobileHeroImg from './images/bg-hero-desktop.svg';
+import MobileHeroImg from './images/bg-hero-mobile.svg';
+import DesktopHeroImg from './images/bg-hero-desktop.svg';
 import HeroMockupImg from './images/illustration-mockups.svg';
 import GrowTogetherImg from './images/illustration-grow-together.svg';
 import FlowTogetherImg from './images/illustration-flowing-conversation.svg';
@@ -10,17 +12,7 @@ import UsersTogetherImg from './images/illustration-your-users.svg';
 function App() {
   return (
     <div className="md:max-w-xl xl:max-w-full max-w-md mx-auto bg-white shadow-sm">
-      <header
-        className="flex flex-col items-center justify-around xl:max-w-full md:max-w-4xl max-w-md h-full bg-primary-verypalecyan"
-        style={{
-          backgroundImage: `url(${MobileHeroImg})`,
-          backgroundRepeat: 'no-repeat',
-          width: '100%',
-        }}
-      >
-        <Nav />
-        <HeroContent />
-      </header>
+      <Header />
       <MainContent />
       <ButtonCard />
       <Footer />
@@ -28,9 +20,71 @@ function App() {
   );
 }
 
+function Header() {
+  const animationRef = React.useRef(null);
+  React.useEffect(() => {
+    animationRef.current = anime({
+      targets: 'h2',
+      translateY: [100, 0],
+      opacity: [0, 1],
+      duration: 3000,
+    });
+    animationRef.current = anime({
+      targets: 'header img',
+      translateX: [100, 0],
+      opacity: [0, 1],
+      duration: 3000,
+    });
+    animationRef.current = anime({
+      targets: 'header button',
+      translateY: [-100, 0],
+      opacity: [0, 1],
+      duration: 3000,
+    });
+  }, []);
+
+  const [width, setWidth] = React.useState(window.innerWidth);
+  const breakPoint = 1440;
+  useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
+  return (
+    <>
+      {width > breakPoint ? (
+        <header
+          className="flex flex-col items-center justify-around xl:max-w-full md:max-w-4xl max-w-md h-full bg-primary-verypalecyan"
+          style={{
+            backgroundImage: `url(${DesktopHeroImg})`,
+            backgroundRepeat: 'no-repeat',
+            width: '100%',
+          }}
+        >
+          <Nav />
+          <HeroContent />
+        </header>
+      ) : (
+        <header
+          className="flex flex-col items-center justify-around xl:max-w-full md:max-w-4xl max-w-md h-full bg-primary-verypalecyan"
+          style={{
+            backgroundImage: `url(${MobileHeroImg})`,
+            backgroundRepeat: 'no-repeat',
+            width: '100%',
+          }}
+        >
+          <Nav />
+          <HeroContent />
+        </header>
+      )}
+    </>
+  );
+}
+
 function Nav() {
   return (
-    <nav className="flex justify-between items-center px-4 xl:px-12 xl:pt-4 pt-4 pb-8 w-full md:pt-6">
+    <nav className="flex justify-between items-center px-4 xl:px-12 xl:pt-4 pt-4 pb-8 w-full lg:w-5/6  md:pt-6">
       <img className="h-6" src={Logo} alt="logo" />
       <button className="px-8 py-1 bg-white hover:bg-primary-pink hover:text-white shadow-lg rounded-full text-sm font-medium cursor-pointer">
         Try It Free
@@ -50,11 +104,11 @@ function HeroContent() {
 
 function HeroText() {
   return (
-    <div className="lg:min-w-min w-full h-96 xl:h-80 mx-auto flex flex-col justify-around xl:items-start xl:text-left items-center text-center">
-      <h2 className="md:w-8/12 lg:text-2xl xl:w-2/3 w-3/4 text-2xl xl:text-4xl font-poppins text-primary-verydarkcyan leading-10">
+    <div className="lg:min-w-min w-full h-96 xl:h-80 mx-auto flex flex-col justify-around lg:justify-around xl:items-start xl:text-left items-center text-center">
+      <h2 className="lg:text-2xl xl:w-2/3 w-3/4 text-2xl xl:text-4xl font-poppins text-primary-verydarkcyan leading-10">
         Build The Community Your Fans Will Love
       </h2>
-      <p className="md:w-9/12 lg:text-md xl:w-2/3 w-5/6 text-primary-grayishblue tracking-normal lg:tracking-tight font-light px-1">
+      <p className="lg:text-md xl:w-2/3 w-5/6 text-primary-grayishblue tracking-normal lg:tracking-tight font-light px-1">
         Huddle re-imagines the way we build communities. You have a voice, but
         so does your audience. Create connections with your users as you engage
         in genuine discussion.
@@ -187,12 +241,12 @@ function Footer() {
       // style={{ minHeight: '900px' }}
       className="min-h-screen xl:min-h-fit flex flex-col xl:flex-row justify-around xl:justify-evenly xl:w-full xl:items-center bg-primary-verydarkcyan z-0 mt-12 text-primary-verypalecyan px-6 pt-16 pb-8"
     >
-      <div className="h-96 w-full flex flex-col justify-around items-start xl:w-5/12 xl:pl-6">
+      <div className="h-96 w-full flex flex-col justify-around items-start xl:w-3/12">
         <img className="w-48 pt-20" src={FooterLogo} alt="footer-logo" />
 
-        <div className="flex justify-between xl:w-10/12">
+        <div className="flex justify-between xl:w-full">
           <i className="fa-solid fa-location-dot fa-bounce pt-1"></i>
-          <p className="w-full pr-12 pl-4 leading-normal">
+          <p className="w-full pl-4 leading-normal">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
@@ -211,18 +265,18 @@ function Footer() {
 
       <ul className="h-60 xl:h-0 flex flex-col xl:flex-row justify-evenly pb-6 xl:w-3/12 xl:flex-wrap xl:place-content-center">
         <li className="w-1/2 hover:underline cursor-pointer">About US</li>
-        <li className="w-1/2 hover:underline cursor-pointer">What We Do</li>
-        <li className="w-1/2 hover:underline cursor-pointer">FAQ</li>
         <li className="w-1/2 hover:underline cursor-pointer">Careeer</li>
+        <li className="w-1/2 hover:underline cursor-pointer">What We Do</li>
         <li className="w-1/2 hover:underline cursor-pointer">Blog</li>
+        <li className="w-1/2 hover:underline cursor-pointer">FAQ</li>
         <li className="w-1/2 hover:underline cursor-pointer">Contact Us</li>
       </ul>
 
       <div className="h-36 w-full flex flex-col justify-around items-center xl:w-3/12 xl:place-content-between">
         <div className="flex justify-around w-1/2">
-          <i className="fa-brands fa-facebook-f hover:ring-primary-pink w-10 h-10 text-center ring-white ring-2 rounded-full px-3.2 py-3"></i>
-          <i className="fa-brands fa-twitter hover:ring-primary-pink w-10 h-10 text-center ring-white ring-2 rounded-full px-3.2 py-3"></i>
-          <i className="fa-brands fa-instagram hover:ring-primary-pink w-10 h-10 text-center ring-white ring-2 rounded-full px-3.2 py-3"></i>
+          <i className="fa-brands fa-facebook-f fa-fade hover:ring-primary-pink w-10 h-10 text-center ring-white ring-2 rounded-full px-3.2 py-3 cursor-pointer"></i>
+          <i className="fa-brands fa-twitter fa-fade hover:ring-primary-pink w-10 h-10 text-center ring-white ring-2 rounded-full px-3.2 py-3 cursor-pointer"></i>
+          <i className="fa-brands fa-instagram fa-fade hover:ring-primary-pink w-10 h-10 text-center ring-white ring-2 rounded-full px-3.2 py-3 cursor-pointer"></i>
         </div>
         <div className="text-xs">
           &copy; Copyright 2023 Huddle. All rights reserved.

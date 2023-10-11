@@ -8,6 +8,8 @@
 		"build:css": "npx tailwindcss -i src/index.css -o src/tailwind.css"
 	},
 	"dependencies": {
+		"@react-spring/web": "^9.7.3",
+		"animejs": "^3.2.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
