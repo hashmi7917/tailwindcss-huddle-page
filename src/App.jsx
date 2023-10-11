@@ -108,7 +108,7 @@ function HeroText() {
       <h2 className="lg:text-2xl xl:w-2/3 w-3/4 text-2xl xl:text-4xl font-poppins text-primary-verydarkcyan leading-10">
         Build The Community Your Fans Will Love
       </h2>
-      <p className="lg:text-md xl:w-2/3 w-5/6 text-primary-grayishblue tracking-normal lg:tracking-tight font-light px-1">
+      <p className="xl:w-2/3 w-5/6 text-primary-verydarkcyan tracking-normal lg:tracking-tight font-light px-1">
         Huddle re-imagines the way we build communities. You have a voice, but
         so does your audience. Create connections with your users as you engage
         in genuine discussion.
